@@ -1,0 +1,101 @@
+{
+  "name": "vscode-copilot-exporter",
+  "displayName": "GitHub Copilot Chat Exporter",
+  "description": "Export your GitHub Copilot chat conversations as JSON or Markdown. Supports multi-workspace, date filters, VS Code Insiders, and user-configurable settings.",
+  "version": "0.2.0",
+  "publisher": "fengzehan",
+  "icon": "logo/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fzzzhan/vscode-copilot-exporter"
+  },
+  "bugs": {
+    "url": "https://github.com/Fzzzhan/vscode-copilot-exporter/issues"
+  },
+  "homepage": "https://github.com/Fzzzhan/vscode-copilot-exporter#readme",
+  "keywords": [
+    "copilot",
+    "chat",
+    "export",
+    "github",
+    "ai",
+    "conversation",
+    "backup",
+    "json"
+  ],
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.70.0",
+    "@vscode/vsce": "^3.9.1",
+    "typescript": "^4.9.5"
+  },
+  "overrides": {
+    "cheerio": "1.0.0-rc.12",
+    "undici": "5.28.4"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "copilot-exporter.exportWorkspaceHistory",
+        "title": "Export Copilot Chat: Export workspace Copilot history",
+        "icon": "$(export)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "copilot-exporter.exportWorkspaceHistory",
+          "when": "true"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Copilot Chat Exporter",
+      "properties": {
+        "copilotExporter.outputDirectory": {
+          "type": "string",
+          "default": "",
+          "description": "Default output directory for exported files. Leave empty to use the workspace folder or home directory."
+        },
+        "copilotExporter.exportFormat": {
+          "type": "string",
+          "enum": [
+            "json",
+            "markdown",
+            "both"
+          ],
+          "enumDescriptions": [
+            "Export as a JSON file",
+            "Export as a Markdown file",
+            "Export as both JSON and Markdown files"
+          ],
+          "default": "json",
+          "description": "Default export format (can be overridden at export time)."
+        },
+        "copilotExporter.defaultDaysBack": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "description": "Default number of days back to filter conversations. Set to 0 to export all conversations."
+        }
+      }
+    }
+  }
+}
