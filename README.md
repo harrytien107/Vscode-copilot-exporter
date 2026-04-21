@@ -18,7 +18,7 @@ Export your GitHub Copilot chat conversations from VS Code as **JSON** or **Mark
 To install, you can compile and package the extension manually via building the VSIX package yourself using tools like `vsce` or directly install the pre-packaged `.vsix` file:
 
 ```shell
-code --install-extension vscode-copilot-exporter-0.2.0.vsix --force
+code --install-extension vscode-copilot-exporter-0.X.0.vsix --force
 ```
 
 ## 🛠️ Usage
